@@ -2,19 +2,22 @@
 import React, { useContext, useState } from 'react';
 import { AppContext } from '../context/AppContext';
 
-const Budget = () => {
-    const { budget } = useContext(AppContext);
+const Budget = ({onChange}) => {
+    const { budget, currency } = useContext(AppContext);
     const [newBudget, setNewBudget] = useState(budget);
-    const [currency, setCurrency] = useState();
-    console.log(currency);
+   // const [newCurrency, setCurrency] = useState(currency);
+    //console.log("budget" + currency);
+    const handleCurrencyChange=(event) =>{
+        onChange(event.target.value)
+    }
     const handleBudgetChange = (event) => {
         setNewBudget(event.target.value);
-    }
-    return (
+    };
+      return (
             
 <div className='alert alert-secondary'>
 <span>Budget: {currency} {budget}</span>
-<select className="custom-select alert alert-success" id="inputCurrencySelect01" onChange={(event) => setCurrency(event.target.value)}>
+<select className="custom-select alert alert-success" id="inputCurrencySelect01" onChange={handleCurrencyChange}>
                         <option defaultValue>Currency</option>
                         <option className="alert alert-success" value="$" currency="Dollar"> $ Dollar</option>
                         <option className="alert alert-success" value="£" currency="Pound">£ Pound</option>
